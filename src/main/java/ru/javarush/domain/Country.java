@@ -1,4 +1,4 @@
-package domain;
+package ru.javarush.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
@@ -12,6 +12,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.FetchType;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -35,6 +36,7 @@ public class Country {
     @Enumerated(EnumType.ORDINAL)
     private Continent continent;
 
+    @Column(name = "region")
     private String region;
 
     @Column(name = "surface_area")
@@ -43,13 +45,14 @@ public class Country {
     @Column(name = "indep_year")
     private Short independenceYear;
 
+    @Column(name = "population")
     private Integer population;
 
     @Column(name = "life_expectancy")
     private BigDecimal lifeExpectancy;
 
     @Column(name = "gnp")
-    private BigDecimal GNP;
+    private BigDecimal gnp;
 
     @Column(name = "gnpo_id")
     private BigDecimal GNPOId;
@@ -151,12 +154,12 @@ public class Country {
         this.lifeExpectancy = lifeExpectancy;
     }
 
-    public BigDecimal getGNP() {
-        return GNP;
+    public BigDecimal getGnp() {
+        return gnp;
     }
 
-    public void setGNP(BigDecimal GNP) {
-        this.GNP = GNP;
+    public void setGnp(BigDecimal gnp) {
+        this.gnp = gnp;
     }
 
     public BigDecimal getGNPOId() {
@@ -205,5 +208,55 @@ public class Country {
 
     public void setLanguages(Set<CountryLanguage> languages) {
         this.languages = languages;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Country country = (Country) o;
+        return Objects.equals(id, country.id)
+                && Objects.equals(code, country.code)
+                && Objects.equals(alternativeCode, country.alternativeCode)
+                && Objects.equals(name, country.name)
+                && continent == country.continent
+                && Objects.equals(region, country.region)
+                && Objects.equals(surfaceArea, country.surfaceArea)
+                && Objects.equals(independenceYear, country.independenceYear)
+                && Objects.equals(population, country.population)
+                && Objects.equals(lifeExpectancy, country.lifeExpectancy)
+                && Objects.equals(gnp, country.gnp)
+                && Objects.equals(GNPOId, country.GNPOId)
+                && Objects.equals(localName, country.localName)
+                && Objects.equals(governmentForm, country.governmentForm)
+                && Objects.equals(headOfState, country.headOfState);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, code, alternativeCode, name, continent, region
+                , surfaceArea, independenceYear, population, lifeExpectancy
+                , gnp, GNPOId, localName, governmentForm, headOfState);
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", alternativeCode='" + alternativeCode + '\'' +
+                ", name='" + name + '\'' +
+                ", continent=" + continent +
+                ", region='" + region + '\'' +
+                ", surfaceArea=" + surfaceArea +
+                ", independenceYear=" + independenceYear +
+                ", population=" + population +
+                ", lifeExpectancy=" + lifeExpectancy +
+                ", gnp=" + gnp +
+                ", GNPOId=" + GNPOId +
+                ", localName='" + localName + '\'' +
+                ", governmentForm='" + governmentForm + '\'' +
+                ", headOfState='" + headOfState + '\'' +
+                '}';
     }
 }

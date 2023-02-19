@@ -1,6 +1,6 @@
-package redis;
+package ru.javarush.redis;
 
-import domain.Continent;
+import ru.javarush.domain.Continent;
 
 import java.math.BigDecimal;
 import java.util.Set;

@@ -1,14 +1,12 @@
-package service;
+package ru.javarush.service;
 
-import domain.City;
-import domain.Country;
-import domain.CountryLanguage;
+import ru.javarush.domain.City;
+import ru.javarush.domain.Country;
+import ru.javarush.domain.CountryLanguage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import java.util.Optional;
 
 public class SessionFactoryProvider {
 
@@ -21,10 +19,10 @@ public class SessionFactoryProvider {
                 .addAnnotatedClass(Country.class)
                 .addAnnotatedClass(CountryLanguage.class)
                 .buildSessionFactory();
-        logger.info("\nConnected to MySQl database\n");
+        logger.info("\nSessionFactory is ready\n");
     }
 
-    public Optional<SessionFactory> getSessionFactory() {
-        return Optional.ofNullable(sessionFactory);
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 }

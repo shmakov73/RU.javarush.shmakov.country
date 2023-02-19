@@ -1,4 +1,4 @@
-package redis;
+package ru.javarush.redis;
 
 import java.math.BigDecimal;
 

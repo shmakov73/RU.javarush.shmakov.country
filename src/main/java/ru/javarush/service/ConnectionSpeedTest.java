@@ -1,10 +1,10 @@
-package service;
+package ru.javarush.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dao.CityDao;
-import domain.City;
-import domain.CountryLanguage;
+import ru.javarush.dao.CityHibernateDao;
+import ru.javarush.domain.City;
+import ru.javarush.domain.CountryLanguage;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisStringCommands;
@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import redis.CityCountry;
+import ru.javarush.redis.CityCountry;
 
 import java.util.Random;
 import java.util.Set;
@@ -21,18 +21,18 @@ import java.util.List;
 
 public class ConnectionSpeedTest {
 
-    private Integer citiesCountForTest = 5;
+    private final Integer citiesCountForTest = 10;
     private static final Logger logger = LogManager.getLogger(ConnectionSpeedTest.class);
     private final SessionFactory sessionFactory;
     private final RedisClient redisClient;
-    private final CityDao cityDao;
+    private final CityHibernateDao cityHibernateDao;
     private final ObjectMapper mapper;
 
 
     public ConnectionSpeedTest(SessionFactory sessionFactory, RedisClient redisClient) {
         this.sessionFactory = sessionFactory;
         this.redisClient = redisClient;
-        cityDao = new CityDao(sessionFactory);
+        cityHibernateDao = new CityHibernateDao(sessionFactory);
         mapper = new ObjectMapper();
     }
 
@@ -72,8 +72,11 @@ public class ConnectionSpeedTest {
         try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
             for (Integer id : ids) {
-                City city = cityDao.getById(id);
-                Set<CountryLanguage> languages = city.getCountry().getLanguages();
+                if (cityHibernateDao.getById(id).isPresent()){
+                    City city = cityHibernateDao.getById(id).get();
+                    Set<CountryLanguage> languages = city.getCountry().getLanguages();
+                }
+
             }
             session.getTransaction().commit();
         }
@@ -90,7 +93,7 @@ public class ConnectionSpeedTest {
         int totalCount;
         try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-            totalCount = cityDao.getTotalCount();
+            totalCount = cityHibernateDao.getTotalCount();
             session.getTransaction().commit();
         }
         return totalCount;
