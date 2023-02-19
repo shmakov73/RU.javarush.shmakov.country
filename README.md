@@ -1,8 +1,14 @@
-Проект по теме: SQL, JDBC и Hibernate.
+Related project: SQL, JDBC and Hibernate.
 
-Есть реляционная БД MySQL со схемой (страна-город, язык по стране). И есть частый запрос города, который тормозит. 
-Мы придумали решение – вынести все данные, которые запрашиваются часто, в Redis (in memory storage типа ключ-значение).
+There is a relational MySQL database with a schema (country-city, language by country). And there is a frequent request of the city, which slows down.
+We came up with a solution - to move all the data that is requested frequently to Redis (in memory storage of the key-value type).
 
-По итогам видно, что скорость ответа на запрос к БД Redis примерно в 1.5 раз выше. В качестве эксперимента можно так-же 
-изменить в запросе количество запрашиваемых данных переменной citiesCountForTest в классе ConnectionSpeedTest. 
-Здесь можно увидеть, что при запросе большего количества данных, производительность Redis будет выше в 2 и более раз.
+The results show that the speed of response to a request to the Redis database is about 1.5 times higher. As an experiment, you can also
+change in the request the amount of requested data of the citiesCountForTest variable in the ConnectionSpeedTest class.
+Here you can see that when requesting more data, the performance of Redis will be 2 or more times higher.
+
+To start MySql database in Docker, run command in commandline:
+docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --restart unless-stopped -v mysql:/var/lib/mysql mysql:8 
+
+To start Redis database in Docker, run command in commandline:
+docker run -d --name redis -p 6379:6379 redis:latest

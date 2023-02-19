@@ -21,8 +21,8 @@ import java.util.List;
 
 public class ConnectionSpeedTest {
 
-    private final Integer citiesCountForTest = 10;
     private static final Logger logger = LogManager.getLogger(ConnectionSpeedTest.class);
+    private final Integer citiesCountForTest = 10;
     private final SessionFactory sessionFactory;
     private final RedisClient redisClient;
     private final CityHibernateDao cityHibernateDao;
