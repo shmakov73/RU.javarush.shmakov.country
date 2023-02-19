@@ -15,3 +15,5 @@ docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --restart un
 
 To start Redis database in Docker, run command in commandline:
 docker run -d --name redis -p 6379:6379 redis:latest
+
+since the project was created for educational purposes, the resources folder contains a dump of the database for which this project was made
