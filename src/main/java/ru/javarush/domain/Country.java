@@ -55,7 +55,7 @@ public class Country {
     private BigDecimal gnp;
 
     @Column(name = "gnpo_id")
-    private BigDecimal GNPOId;
+    private BigDecimal gnpoId;
 
     @Column(name = "local_name")
     private String localName;
@@ -162,12 +162,12 @@ public class Country {
         this.gnp = gnp;
     }
 
-    public BigDecimal getGNPOId() {
-        return GNPOId;
+    public BigDecimal getGnpoId() {
+        return gnpoId;
     }
 
-    public void setGNPOId(BigDecimal GNPOId) {
-        this.GNPOId = GNPOId;
+    public void setGnpoId(BigDecimal gnpoId) {
+        this.gnpoId = gnpoId;
     }
 
     public String getLocalName() {
@@ -226,7 +226,7 @@ public class Country {
                 && Objects.equals(population, country.population)
                 && Objects.equals(lifeExpectancy, country.lifeExpectancy)
                 && Objects.equals(gnp, country.gnp)
-                && Objects.equals(GNPOId, country.GNPOId)
+                && Objects.equals(gnpoId, country.gnpoId)
                 && Objects.equals(localName, country.localName)
                 && Objects.equals(governmentForm, country.governmentForm)
                 && Objects.equals(headOfState, country.headOfState);
@@ -236,7 +236,7 @@ public class Country {
     public int hashCode() {
         return Objects.hash(id, code, alternativeCode, name, continent, region
                 , surfaceArea, independenceYear, population, lifeExpectancy
-                , gnp, GNPOId, localName, governmentForm, headOfState);
+                , gnp, gnpoId, localName, governmentForm, headOfState);
     }
 
     @Override
@@ -253,7 +253,7 @@ public class Country {
                 ", population=" + population +
                 ", lifeExpectancy=" + lifeExpectancy +
                 ", gnp=" + gnp +
-                ", GNPOId=" + GNPOId +
+                ", GNPOId=" + gnpoId +
                 ", localName='" + localName + '\'' +
                 ", governmentForm='" + governmentForm + '\'' +
                 ", headOfState='" + headOfState + '\'' +

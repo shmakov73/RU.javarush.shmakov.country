@@ -11,7 +11,7 @@ Here you can see that when requesting more data, the performance of Redis will b
 
 
 To start MySql database in Docker, run command in commandline:
-docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --restart unless-stopped -v mysql:/var/lib/mysql mysql:8 
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=qwerty -d -p 3306:3306 mysql:latest 
 
 To start Redis database in Docker, run command in commandline:
 docker run -d --name redis -p 6379:6379 redis:latest
