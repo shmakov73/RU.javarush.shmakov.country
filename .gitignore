@@ -1,2 +1,4 @@
 /.idea
 /target
+*.iml
+src/main/resources/dump-hibernate-final.sql
